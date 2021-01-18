@@ -31,7 +31,8 @@ public:
   std::cin >> a;
 
 // Logs a message
-#define LOG(message) std::clog << std::endl << "LOG: " << message << std::endl;
+#define LOG(message) std::clog << std::endl << "LOG ("  << __FILE__ << ":" << __LINE__   << "): "<< message << std::endl
+
 #define DEBC(value, message)                                                   \
   (std::clog << value << " (int)" << (int)value << ": " << message << std::endl)
 #define DEB(message) (std::clog << "___" << message << "___" << std::endl)
