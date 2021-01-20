@@ -18,6 +18,7 @@ public:
   std::cerr << "_________"                                                     \
             << "Error"                                                         \
             << "_________" << std::endl                                        \
+            << "(" << __FILE__ << ":" << __LINE__ << ")" << std::endl                                         \
             << message << std::endl;                                           \
   exit(111)
 
@@ -26,6 +27,7 @@ public:
   std::clog << "________"                                                      \
             << "Warn"                                                          \
             << "________" << std::endl                                         \
+            << "(" << __FILE__ << ":" << __LINE__ << ")" << std::endl                                         \
             << message << std::endl;                                           \
   std::string a;                                                               \
   std::cin >> a;
