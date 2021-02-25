@@ -22,6 +22,7 @@ void Logger::log(const std::string &text) {
 }
 
 const Logger &Logger::get_instance() {
+// if instance does not exists create it 
   if (!instance) {
     instance = new Logger;
   }
