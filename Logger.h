@@ -35,6 +35,7 @@ private:
     none = 4
   } level;
 
+  // singelton instance
   static Logger *instance;
 
   Logger(/* Config */);
