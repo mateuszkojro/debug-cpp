@@ -21,27 +21,23 @@ public:
   static void log(const std::string &);
   static void warn(const std::string &);
   static void err(const std::string &);
-  static void panic(const std::string&);
+  static void panic(const std::string &);
 
-  static void true_or_panic(bool, const std::string&);
-  static void true_or_err(bool, const std::string&);
+  static void true_or_panic(bool, const std::string &);
+  static void true_or_err(bool, const std::string &);
 
   static void log(const std::string &, size_t debug_flag);
   static void warn(const std::string &, size_t debug_flag);
   static void err(const std::string &, size_t debug_flag);
 
-  static std::ostream& info(std::ostream&); 
+  static std::ostream &info(std::ostream &);
+  static std::fstream &info(std::fstream &);
 
   // Level get_level();
   void set_level(/* Log level */);
 
 private:
-  static enum Level {
-    all = 0,
-    warning = 1,
-    error = 2,
-    none = 3
-  } level;
+  static enum Level { all = 0, warning = 1, error = 2, none = 3 } level;
 
   // singelton instance
   static Logger *instance;

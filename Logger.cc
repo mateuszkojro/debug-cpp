@@ -1,4 +1,5 @@
 #include "Logger.h"
+#include "debug.h"
 #include <assert.h>
 #include <bits/types/__FILE.h>
 #include <cstdlib>
@@ -18,19 +19,31 @@ void Logger::panic(const std::string &text) {
 
 void Logger::err(const std::string &text) {
   if (level <= Logger::all) {
-    std::cerr << Logger::info << text << std::endl;
+    if (config.to_file) {
+      throw new not_implemented_exception;
+    } else {
+      std::cerr << Logger::info << text << std::endl;
+    }
   }
 }
 
 void Logger::warn(const std::string &text) {
   if (level <= Logger::warning) {
-    std::cerr << Logger::info << text << std::endl;
+    if (config.to_file) {
+      throw new not_implemented_exception;
+    } else {
+      std::cerr << Logger::info << text << std::endl;
+    }
   }
 }
 
 void Logger::log(const std::string &text) {
   if (level <= Logger::all) {
-    std::clog << Logger::info << text << std::endl;
+    if (config.to_file) {
+      throw new not_implemented_exception;
+    } else {
+      std::clog << Logger::info << text << std::endl;
+    }
   }
 }
 
@@ -50,12 +63,35 @@ void Logger::true_or_panic(bool condition, const std::string &text) {
 
 void Logger::true_or_err(bool condition, const std::string &text) {
   if (!condition) {
-    std::cerr << Logger::info << text << std::endl;
+    if (config.to_file) {
+      throw new not_implemented_exception;
+    } else {
+      std::cerr << Logger::info << text << std::endl;
+    }
   }
 }
 
 // @TODO refactor
 std::ostream &Logger::info(std::ostream &in) {
+
+  in << ((Logger::config.show_file && Logger::config.show_func &&
+          Logger::config.show_line)
+             ? "[ "
+             : "");
+
+  in << ((Logger::config.show_file) ? __FILE__ : "");
+  in << ":";
+  in << ((Logger::config.show_func) ? __PRETTY_FUNCTION__ : "");
+  in << ":";
+  in << ((Logger::config.show_line) ? std::to_string(__LINE__) : "");
+
+  in << ((Logger::config.show_file && Logger::config.show_func &&
+          Logger::config.show_line)
+             ? " ] "
+             : "");
+  return in;
+}
+std::fstream &Logger::info(std::fstream &in) {
 
   in << ((Logger::config.show_file && Logger::config.show_func &&
           Logger::config.show_line)
