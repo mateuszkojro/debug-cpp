@@ -12,7 +12,11 @@ namespace mk {
 Logger::Logger() {}
 
 void Logger::panic(const std::string &text) {
-  std::cerr << Logger::info << text << std::endl;
+  if (config.to_file) {
+    Logger::log_file_ << Logger::info << text << std::endl; 
+  } else {
+    std::cerr << Logger::info << text << std::endl;
+  }
   assert(false);
   exit(1);
 }
@@ -20,7 +24,7 @@ void Logger::panic(const std::string &text) {
 void Logger::err(const std::string &text) {
   if (level <= Logger::all) {
     if (config.to_file) {
-      throw new not_implemented_exception;
+       Logger::log_file_ << Logger::info << text << std::endl; 
     } else {
       std::cerr << Logger::info << text << std::endl;
     }
@@ -30,7 +34,7 @@ void Logger::err(const std::string &text) {
 void Logger::warn(const std::string &text) {
   if (level <= Logger::warning) {
     if (config.to_file) {
-      throw new not_implemented_exception;
+       Logger::log_file_ << Logger::info << text << std::endl; 
     } else {
       std::cerr << Logger::info << text << std::endl;
     }
@@ -40,7 +44,7 @@ void Logger::warn(const std::string &text) {
 void Logger::log(const std::string &text) {
   if (level <= Logger::all) {
     if (config.to_file) {
-      throw new not_implemented_exception;
+       Logger::log_file_ << Logger::info << text << std::endl; 
     } else {
       std::clog << Logger::info << text << std::endl;
     }
@@ -64,7 +68,7 @@ void Logger::true_or_panic(bool condition, const std::string &text) {
 void Logger::true_or_err(bool condition, const std::string &text) {
   if (!condition) {
     if (config.to_file) {
-      throw new not_implemented_exception;
+      Logger::log_file_ << Logger::info << text << std::endl; 
     } else {
       std::cerr << Logger::info << text << std::endl;
     }
