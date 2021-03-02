@@ -16,7 +16,21 @@ public:
     bool to_file = false;
   } config;
 
+  static enum Level { 
+    all = 0, 
+    warning = 1, 
+    error = 2, 
+    none = 3 
+  } level;
+
+
   static const Logger &get_instance();
+
+  static void init(
+    Logger::Level level = Logger::none, 
+    Logger::Config config = { false, false, false, false }, 
+    std::string path = "./log"
+    );
 
   static void log(const std::string &);
   static void warn(const std::string &);
@@ -37,10 +51,11 @@ public:
   void set_level(/* Log level */);
 
 private:
-  static enum Level { all = 0, warning = 1, error = 2, none = 3 } level;
 
   // singelton instance
   static Logger *instance;
+
+  static std::fstream log_file_;
 
   Logger(/* Config */);
 };

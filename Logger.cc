@@ -111,8 +111,15 @@ std::fstream &Logger::info(std::fstream &in) {
   return in;
 }
 
+void Logger::init(Logger::Level level, Logger::Config config, std::string path){
+  log_file_.open(path, std::ios::app);
+  Logger::config = config;
+  Logger::level = level;
+}
+
 Logger::Config Logger::config = {false, false, false};
 Logger::Level Logger::level = Logger::none;
 Logger *Logger::instance = nullptr;
+std::fstream Logger::log_file_;
 
 } // namespace mk
