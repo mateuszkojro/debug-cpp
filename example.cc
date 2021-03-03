@@ -1,6 +1,10 @@
 #include "Logger.h"
 #include <iostream>
 
+void hello(){
+  ERR("thats an err");
+}
+
 int main() {
 
   mk::Logger::Config config{.show_line = true,
@@ -14,5 +18,6 @@ int main() {
     TRUE_OR_ERR(false, "some message");
     LOG("hello");
     WARN("hello");
+    hello();
   }
 }

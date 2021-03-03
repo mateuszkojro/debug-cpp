@@ -64,7 +64,7 @@ std::ostream &operator<<(std::ostream &ou, Logger::Info);
   { __FILE__, __LINE__, __PRETTY_FUNCTION__ }
 
 #define LOG(message) mk::Logger::log(message, GET_CODE_INFO)
-#define ERR(mess) mk::Logger::err(message, GET_CODE_INFO)
+#define ERR(message) mk::Logger::err(message, GET_CODE_INFO)
 #define WARN(message) mk::Logger::warn(message, GET_CODE_INFO)
 #define TRUE_OR_ERR(condition, message)                                        \
   mk::Logger::true_or_err(condition, message, (mk::Logger::Info)GET_CODE_INFO)

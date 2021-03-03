@@ -34,9 +34,9 @@ void Logger::err(const std::string &text, Info info) {
 void Logger::warn(const std::string &text, Info info) {
   if (level <= Logger::warning) {
     if (config.to_file) {
-      Logger::log_file_ << "Warning:\t" << info << text << std::endl;
+      Logger::log_file_ << "Warn:\t" << info << text << std::endl;
     } else {
-      std::cerr << "Warning:\t" << info << text << std::endl;
+      std::cerr << "Warn:\t" << info << text << std::endl;
     }
   }
 }
@@ -76,39 +76,17 @@ void Logger::true_or_err(bool condition, const std::string &text, Info info) {
 }
 
 std::fstream &operator<<(std::fstream &in, Logger::Info info) {
-  in << ((Logger::config.show_file && Logger::config.show_func &&
-          Logger::config.show_line)
-             ? "[ "
-             : "");
-
-  in << ((Logger::config.show_file) ? info.file : "");
-  in << ":";
-  in << ((Logger::config.show_func) ? info.function : "");
-  in << ":";
-  in << ((Logger::config.show_line) ? std::to_string(info.line) : "");
-
-  in << ((Logger::config.show_file && Logger::config.show_func &&
-          Logger::config.show_line)
-             ? " ] "
-             : "");
+  in << ((Logger::config.show_file) ? "[ " + info.file + " ]" : "");
+  in << ((Logger::config.show_func) ? "[ " + info.function + " ]" : "");
+  in << ((Logger::config.show_line) ? "[ " + std::to_string(info.line) + " ]"
+                                    : "");
   return in;
 }
 std::ostream &operator<<(std::ostream &in, Logger::Info info) {
-  in << ((Logger::config.show_file && Logger::config.show_func &&
-          Logger::config.show_line)
-             ? "[ "
-             : "");
-
-  in << ((Logger::config.show_file) ? info.file : "");
-  in << ":";
-  in << ((Logger::config.show_func) ? info.function : "");
-  in << ":";
-  in << ((Logger::config.show_line) ? std::to_string(info.line) : "");
-
-  in << ((Logger::config.show_file && Logger::config.show_func &&
-          Logger::config.show_line)
-             ? " ] "
-             : "");
+  in << ((Logger::config.show_file) ? "[ " + info.file + " ]" : "");
+  in << ((Logger::config.show_func) ? "[ " + info.function + " ]" : "");
+  in << ((Logger::config.show_line) ? "[ " + std::to_string(info.line) + " ]"
+                                    : "");
   return in;
 }
 
