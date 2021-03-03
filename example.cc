@@ -2,9 +2,12 @@
 #include <iostream>
 
 int main() {
-
   mk::Logger::init();
-  mk::Logger::config = {true, true, false, false};
-  mk::Logger::true_or_err(false, "some message");
-
+  mk::Logger::level = mk::Logger::all;
+  mk::Logger::config = {false, false, true, false};
+  for (int i = 0; i < 30; i++) {
+    TRUE_OR_ERR(false, "some message");
+    LOG("hello");
+    WARN("hello");
+  }
 }
