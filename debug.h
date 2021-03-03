@@ -11,7 +11,7 @@ public:
     return "Function is not yet implemented";
   }
 };
-#ifdef DEBUG
+#ifdef LEGACY_DEBUG
 
 // Sends a message and exits program
 #define ERR(message)                                                           \
@@ -49,8 +49,5 @@ public:
                    .count()                                                    \
             << std::endl
 
-#define DEBC(value, message) ""
-#define DEB(message) ""
-#define ERR(message) ""
 #endif
 #endif
