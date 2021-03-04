@@ -68,7 +68,7 @@ std::ostream &operator<<(std::ostream &ou, Logger::Info);
 #define WARN(message) mk::Logger::warn(message, GET_CODE_INFO)
 #define TRUE_OR_ERR(condition, message)                                        \
   mk::Logger::true_or_err(condition, message, (mk::Logger::Info)GET_CODE_INFO)
-#define TURE_OR_PANIC(condition, message)                                      \
+#define TRUE_OR_PANIC(condition, message)                                      \
   mk::Logger::true_or_panic(condition, message, GET_CODE_INFO)
 
 } // namespace mk
