@@ -16,6 +16,7 @@ int main() {
 
   for (int i = 0; i < 30; i++) {
     TRUE_OR_ERR(false, "some message");
+    TRUE_OR_PANIC(false,"message ");
     LOG("hello");
     WARN("hello");
     hello();

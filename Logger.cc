@@ -17,7 +17,6 @@ void Logger::panic(const std::string &text, Info info) {
   } else {
     std::cerr << "PANIC:\t" << info << text << std::endl;
   }
-  assert(false);
   exit(1);
 }
 
@@ -80,6 +79,7 @@ std::fstream &operator<<(std::fstream &in, Logger::Info info) {
   in << ((Logger::config.show_func) ? "[ " + info.function + " ]" : "");
   in << ((Logger::config.show_line) ? "[ " + std::to_string(info.line) + " ]"
                                     : "");
+  in << " ";
   return in;
 }
 std::ostream &operator<<(std::ostream &in, Logger::Info info) {
@@ -87,6 +87,7 @@ std::ostream &operator<<(std::ostream &in, Logger::Info info) {
   in << ((Logger::config.show_func) ? "[ " + info.function + " ]" : "");
   in << ((Logger::config.show_line) ? "[ " + std::to_string(info.line) + " ]"
                                     : "");
+  in << " ";
   return in;
 }
 
