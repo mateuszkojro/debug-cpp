@@ -39,7 +39,6 @@ public:
   (std::clog << value << " (int)" << (int)value << ": " << message << std::endl)
 #define DEB(message) (std::clog << "___" << message << "___" << std::endl)
 
-#else
 #define TIME_START(name) auto name = std::chrono::high_resolution_clock::now()
 #define TIME_STOP(name, desc)                                                  \
   auto stop = std::chrono::high_resolution_clock::now();                       \
@@ -48,6 +47,8 @@ public:
                                                                      name)     \
                    .count()                                                    \
             << std::endl
+#else
+
 
 #endif
 #endif

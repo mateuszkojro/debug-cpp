@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <chrono>
 
 namespace mk {
 
@@ -14,6 +15,7 @@ public:
     bool show_file = false;
     bool show_func = false;
     bool to_file = false;
+    bool timing = false;
   } config;
 
   struct Info {
@@ -27,7 +29,7 @@ public:
   static const Logger &get_instance();
 
   static void init(Logger::Level level = Logger::none,
-                   Logger::Config config = {false, false, false, false},
+                   Logger::Config config = {false, false, false, false, true},
                    std::string path = "./log");
 
   static void log(const std::string &, Info);
@@ -38,6 +40,7 @@ public:
   static void true_or_panic(bool, const std::string &, Info);
   static void true_or_err(bool, const std::string &, Info);
 
+  static void time_stop(size_t, const std::string &, Info);
   static void log(const std::string &, size_t debug_flag);
   static void warn(const std::string &, size_t debug_flag);
   static void err(const std::string &, size_t debug_flag);
@@ -71,4 +74,11 @@ std::ostream &operator<<(std::ostream &ou, Logger::Info);
 #define TRUE_OR_PANIC(condition, message)                                      \
   mk::Logger::true_or_panic(condition, message, GET_CODE_INFO)
 
+#define TIME_START(name) auto name = std::chrono::high_resolution_clock::now()
+#define TIME_STOP(name, desc)                                                  \
+  auto stop = std::chrono::high_resolution_clock::now();                       \
+  mk::Logger::time_stop(                                                       \
+    std::chrono::duration_cast<std::chrono::microseconds>(stop - name).count(),\
+    desc,                                                                      \
+    GET_CODE_INFO)
 } // namespace mk

@@ -74,6 +74,17 @@ void Logger::true_or_err(bool condition, const std::string &text, Info info) {
   }
 }
 
+void Logger::time_stop(size_t duration, const std::string &description,
+                       Logger::Info info) {
+  if (config.timing) {
+    if (config.to_file) {
+      Logger::log_file_ << "Time:\t" << info << description << duration << std::endl;
+    } else {
+      std::clog << "Time:\t" << info << description << " " << duration << " us" << std::endl;
+    }
+  }
+}
+
 std::fstream &operator<<(std::fstream &in, Logger::Info info) {
   in << ((Logger::config.show_file) ? "[ " + info.file + " ]" : "");
   in << ((Logger::config.show_func) ? "[ " + info.function + " ]" : "");
@@ -82,6 +93,7 @@ std::fstream &operator<<(std::fstream &in, Logger::Info info) {
   in << " ";
   return in;
 }
+
 std::ostream &operator<<(std::ostream &in, Logger::Info info) {
   in << ((Logger::config.show_file) ? "[ " + info.file + " ]" : "");
   in << ((Logger::config.show_func) ? "[ " + info.function + " ]" : "");
